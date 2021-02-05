@@ -16,7 +16,16 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    /* ... */
+    axios.get('https://mycfdb.herokuapp.com/movies')
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onMovieClick(movie) {
