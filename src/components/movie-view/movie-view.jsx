@@ -34,7 +34,7 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Director.Name}</span>
         </div>
         <button
-          onClick={this.refreshPage}>GO Back
+          onClick={this.props.onBackClick}>GO Back
         </button>
       </div>
 
