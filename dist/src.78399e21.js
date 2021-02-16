@@ -31720,7 +31720,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
       }, movie.Director.Name)), _react.default.createElement("button", {
-        onClick: this.refreshPage
+        onClick: this.props.onBackClick
       }, "GO Back"));
     }
   }]);
@@ -31823,7 +31823,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement("div", {
         className: "main-view"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
-        movie: selectedMovie
+        movie: selectedMovie,
+        onBackClick: function onBackClick(movie) {
+          return _this3.onMovieClick(null);
+        }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
@@ -32001,7 +32004,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60761" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57874" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
