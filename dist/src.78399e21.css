@@ -1,3 +1,46 @@
+.login-form {
+  margin: 20px;
+  padding: 30px;
+}
+
+.login-header {
+  text-align: center;
+}
+.register-form {
+  margin: 20px;
+  padding: 30px;
+}
+
+.register-header {
+  text-align: center;
+}
+.movie-card {
+  margin: 10px 0px;
+}
+.movie-view {
+  margin: 0px 50px;
+}
+
+.movie-poster {
+  width: 50%;
+  margin: 20px auto;
+}
+
+.label-title {
+  font-size: 40px;
+}
+
+.label-body {
+  font-size: 16px;
+}
+
+.return-button {
+  margin: auto;
+  margin-bottom: 20px;
+}
+.main-body {
+  padding: 20px;
+}
 .my-flix {
   color: steelblue;
 }
