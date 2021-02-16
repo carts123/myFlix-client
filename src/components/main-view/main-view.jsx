@@ -61,10 +61,9 @@ export class MainView extends React.Component {
 
 
   render() {
-    const { movies, selectedMovie } = this.state;
+    const { movies, user, selectedMovie } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     // Before the movies have been loaded
@@ -79,8 +78,8 @@ export class MainView extends React.Component {
             </Col>
           )
           : movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
+            <Col md={3} key={movie._id}>
+              <MovieCard movie={movie} onClick={movie => this.onMovieClick(movie)} />
             </Col>
           ))
         }
