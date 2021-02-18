@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Form, Button } from 'react-bootstrap';
 
 import './registration-view.scss';
 
@@ -17,29 +18,38 @@ export function RegisterView(props) {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Email:
-        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <label>
-        Confirm Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <label>
-        Birthday:
-        <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
-    </form>
+    <Form>
+      <Form.Row>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+        </Form.Group>
+
+        <Form.Group controlId="formGridEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
+        </Form.Group>
+      </Form.Row>
+
+      <Form.Row>
+        <Form.Group controlId="formGridPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+        </Form.Group>
+
+        <Form.Group controlId="formGridPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control type="password" onChange={e => setConfirmPassword(e.target.value)} />
+        </Form.Group>
+
+        <Form.Group controlId="formGridBirthday">
+          <Form.Label>Birthday</Form.Label>
+          <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+        </Form.Group>
+      </Form.Row>
+
+      <Button variant="primary" type="submit">Submit</Button>
+    </Form>
   );
 }
 

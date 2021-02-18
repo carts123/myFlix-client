@@ -8,8 +8,13 @@ import { MovieView } from '../movie-view/movie-view';
 
 import './main-view.scss';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Navbar,
+  Nav,
+  Container,
+  Row,
+  Col,
+} from 'react-bootstrap';
 
 export class MainView extends React.Component {
 
@@ -38,14 +43,14 @@ export class MainView extends React.Component {
       });
   }
 
-
+  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
-
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(user) {
     this.setState({
       user
@@ -66,24 +71,44 @@ export class MainView extends React.Component {
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
+    /* Register */
+    if (!register)
+      return (
+        <RegisterView onRegister={(register) => this.onRegister(register)} />
+      );
+
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={8}>
-              <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={3} key={movie._id}>
-              <MovieCard movie={movie} onClick={movie => this.onMovieClick(movie)} />
-            </Col>
-          ))
-        }
-      </Row>
+      <React.Fragment>
+        <div className='main-view'>
+          <header>
+            <Navbar bg="dark" variant="dark">
+              <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+              <Nav className="mr-auto">
+                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="#genres">Genres</Nav.Link>
+                <Nav.Link href="#directors">Directors</Nav.Link>
+              </Nav>
+            </Navbar>
+          </header>
+          <Row className="main-view justify-content-md-center">
+            {selectedMovie
+              ? (
+                <Col md={8}>
+                  <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
+                </Col>
+              )
+              : movies.map(movie => (
+                <Col md={3} key={movie._id}>
+                  <MovieCard movie={movie} onClick={movie => this.onMovieClick(movie)} />
+                </Col>
+              ))
+            }
+          </Row>
+        </div>
+      </React.Fragment>
     );
   }
 }
