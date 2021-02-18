@@ -47978,28 +47978,28 @@ function RegisterView(props) {
       return setUsername(e.target.value);
     }
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formGridEmail"
+    controlId: "formEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "email",
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
   }))), _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formGridPassword"
+    controlId: "formPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formGridPassword"
+    controlId: "formConfirmPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     onChange: function onChange(e) {
       return setConfirmPassword(e.target.value);
     }
   })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formGridBirthday"
+    controlId: "formBirthday"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
     onChange: function onChange(e) {
@@ -48007,7 +48007,8 @@ function RegisterView(props) {
     }
   }))), _react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
-    type: "submit"
+    type: "submit",
+    onClick: handleSubmit
   }, "Submit"));
 }
 
@@ -48391,7 +48392,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         variant: "dark"
       }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
         href: "#home"
-      }, "Navbar"), _react.default.createElement(_reactBootstrap.Nav, {
+      }, "MyFlix"), _react.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto"
       }, _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: "#home"
@@ -48522,7 +48523,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59576" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
