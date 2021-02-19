@@ -72,10 +72,8 @@ export class MainView extends React.Component {
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     /* Register */
-    if (!register)
-      return (
-        <RegisterView onRegister={(register) => this.onRegister(register)} />
-      );
+    if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)} />;
+
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
@@ -84,7 +82,7 @@ export class MainView extends React.Component {
       <React.Fragment>
         <div className='main-view'>
           <header>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" expand="lg">
               <Navbar.Brand href="#home">MyFlix</Navbar.Brand>
               <Nav className="mr-auto">
                 <Nav.Link href="#home">Home</Nav.Link>

@@ -48,8 +48,9 @@ export function RegisterView(props) {
         </Form.Group>
       </Form.Row>
 
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
     </Form>
+
   );
 }
 

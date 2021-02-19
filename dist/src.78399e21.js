@@ -47868,6 +47868,7 @@ function LoginView(props) {
     /* then call props.onLoggedIn(username) */
 
     props.onLoggedIn(username);
+    props.onLoggedIn(password);
   };
 
   return _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, {
@@ -48009,7 +48010,7 @@ function RegisterView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Register"));
 }
 
 RegisterView.propTypes = {
@@ -48389,7 +48390,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "main-view"
       }, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
         bg: "dark",
-        variant: "dark"
+        variant: "dark",
+        expand: "lg"
       }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
         href: "#home"
       }, "MyFlix"), _react.default.createElement(_reactBootstrap.Nav, {
@@ -48523,7 +48525,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59576" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60211" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
