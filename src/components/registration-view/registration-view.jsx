@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 import './registration-view.scss';
 
@@ -11,10 +12,23 @@ export function RegisterView(props) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegister('test');
+    axios.post('https://mycfdb.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self'); // '_self' is necessary so the page will open in the current tab
+        alert('You may now log in');
+      })
+      .catch(e => {
+        console.log('error registering the user')
+      });
   };
 
   return (
