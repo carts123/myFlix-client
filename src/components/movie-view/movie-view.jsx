@@ -14,20 +14,20 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
-  addFavorite(movie) {
-    let token = localStorage.getItem("token");
-    let url = "https://mycfdb.herokuapp.com/moviesusers/" + localStorage.getItem("user") + "/movies/" + movie._id;
-
-    console.log(token);
-
-    axios
-      .post(url, "", {
-        headers: { Authorization: `Bearer ${token}` },
+  handleAddFavourite(e, movie) {
+    e.preventDefault();
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios({
+      method: 'post',
+      url: `https://mycfdb.herokuapp.com/users/${username}/Movies/${movie._id}`,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(() => {
+        alert(`${movie.Title} was succesfully added to your Favourites`);
       })
-      .then((response) => {
-        console.log(response);
-        window.open("/users/" + localStorage.getItem("user"), "_self");
-        alert("Added to favorites!");
+      .catch(function (err) {
+        console.log(err);
       });
   }
 
@@ -57,7 +57,9 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Director.Name}</span>
         </div>
         <div>
-          <Button variant="dark" size="sm" onClick={() => this.addFavorite(movie)}>Add to Favorites</Button>
+          <Button className="movie-view-button favourites-button" variant="dark" size="sm" value={movie._id} onClick={(e) => this.handleAddFavourite(e, movie)}>
+            Add to Favourites
+								</Button>
         </div>
         <Link to={'/'}> <Button variant="dark" className="mt-3" size="sm">Back</Button>
         </Link>

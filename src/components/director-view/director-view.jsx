@@ -10,6 +10,7 @@ import {
   Container,
   Card,
   ListGroup,
+  Button,
 } from 'react-bootstrap';
 
 
@@ -30,26 +31,26 @@ export class DirectorView extends React.Component {
         <Container>
           <Row>
             <Card className='director-details-card'>
-              <Card.Title className='director-name'>{director.Name}</Card.Title>
-              <Card.Text className='director-bio director-details'>{director.Bio}</Card.Text>
+              <Card.Title className='director-name'>{director.Director.Name}</Card.Title>
+              <Card.Text className='director-bio director-details'>{director.Director.Bio}</Card.Text>
               <ListGroup variant='flush' className='card-content'>
                 <ListGroup.Item className='director-yob director-details'>
                   <span className='label'>Born:</span>
                   <br />
-                  {director.Birth}
+                  {director.Director.Birth}
                   <br />
                 </ListGroup.Item>
               </ListGroup>
             </Card>
           </Row>
-          <Card className='director-moreMovies' border='info'>
+          <Card className='mb-3 mr-2 h-100' style={{ width: '16rem' }}>
             <Card.Body>
-              <Card.Title>Movies by {director.Name}:</Card.Title>
+              <Card.Title>Some {director.Director.Name} movies:</Card.Title>
               <ListGroup className='director-MovieCard'>
                 <div className='director-view-movies-flex'>
                   {movies.map((movie) => {
-                    if (movie.Director.Name === director.Name) {
-                      return (<MovieCard key={movie._id} movie={m} />)
+                    if (movie.Director.Name === director.Director.Name) {
+                      return (<MovieCard key={movie._id} movie={movie} />)
                     }
                   })}
                 </div>
@@ -69,7 +70,7 @@ export class DirectorView extends React.Component {
 
 DirectorView.propTypes = {
   movie: PropTypes.shape({
-    director: PropTypes.shape({
+    Director: PropTypes.shape({
       Name: PropTypes.string.isRequired,
       Bio: PropTypes.string.isRequired,
       Birth: PropTypes.string.isRequired,
