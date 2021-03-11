@@ -197,13 +197,13 @@ export class ProfileView extends React.Component {
 
           <Tab className='tab-item' eventKey='update' title='Update'>
             <Card className='update-card'>
-              <h1 className="profile-title">Update Profile</h1>
+              <h1 className='profile-title'>Update Profile</h1>
               <Card.Body>
-                <Form noValidate validated={validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
-                  <Form.Group controlId="formBasicUsername">
-                    <Form.Label className="form-label">Username</Form.Label>
-                    <Form.Control type="text" placeholder="Change Username" onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
-                    <Form.Control.Feedback type="invalid">Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
+                <Form noValidate validated={validated} className='update-form' onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
+                  <Form.Group controlId='formBasicUsername'>
+                    <Form.Label className='form-label'>Username</Form.Label>
+                    <Form.Control type='text' placeholder='Change Username' onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
+                    <Form.Control.Feedback type='invalid'>Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                     <Form.Label className="form-label">
