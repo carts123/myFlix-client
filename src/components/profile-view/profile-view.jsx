@@ -23,7 +23,7 @@ export class ProfileView extends React.Component {
       Password: null,
       Email: null,
       Birthday: null,
-      FavouriteMovies: [],
+      FavoriteMovies: [],
       validated: null,
     };
   }
@@ -47,7 +47,7 @@ export class ProfileView extends React.Component {
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
-          FavouriteMovies: response.data.FavouriteMovies,
+          FavoriteMovies: response.data.FavoriteMovies,
         });
       })
       .catch(function (error) {
@@ -55,19 +55,17 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleRemoveFavourite(e, movie) {
+  handleRemoveFavorite(e, movie) {
     e.preventDefault();
 
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
-    axios
-      .delete(`https://mycfdb.herokuapp.com/users/${username}/Movies/${movie}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    axios.delete(`https://mycfdb.herokuapp.com/users/${username}/Movies/${movie}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then(() => {
         alert('Movie removed from favourites');
         this.componentDidMount();
-        // window.open('_self');
       })
       .catch(function (error) {
         console.log(error);
@@ -158,7 +156,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { FavouriteMovies, validated } = this.state;
+    const { FavoriteMovies, validated } = this.state;
     const username = localStorage.getItem('user');
     const { movies } = this.props;
 
@@ -168,23 +166,23 @@ export class ProfileView extends React.Component {
           <Tab className='tab-item' eventKey='profile' title='Profile'>
             <Card className='profile-card'>
               <Card.Title className='profile-title'>{username}'s Favourite Movies</Card.Title>
-              {FavouriteMovies.length === 0 && <div className='card-content'>You don't have any favourite movies yet!</div>}
+              {FavoriteMovies.length === 0 && <div className='card-content'>You have no favourite movies yet!</div>}
 
               <div className='favourites-container'>
-                {FavouriteMovies.length > 0 &&
+                {FavoriteMovies.length > 0 &&
                   movies.map((movie) => {
-                    if (movie._id === FavouriteMovies.find((favMovie) => favMovie === movie._id)) {
+                    if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
                       return (
                         <div key={movie._id}>
-                          <Card className='favourites-item card-content' style={{ width: '16rem', flex: 1 }}>
+                          <Card className='favourites-item card-content' style={{ width: '16rem' }}>
                             <Card.Img variant="top" src={movie.ImagePath} key={movie.ImagePath} />
                             <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
                             <Card.Subtitle className='text-muted fav-subtitle'>{movie.Year}</Card.Subtitle>
                             <Card.Body className='movie-card-body'>
-                              <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
+                              <Button size='sm' className='view-movie' variant='light' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                 View Movie
                                 </Button>
-                              <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavourite(e, movie._id)}>
+                              <Button size='sm' className='remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
                                 Remove
 							                	</Button>
                             </Card.Body>
@@ -205,14 +203,14 @@ export class ProfileView extends React.Component {
                   <Form.Group controlId="formBasicUsername">
                     <Form.Label className="form-label">Username</Form.Label>
                     <Form.Control type="text" placeholder="Change Username" onChange={(e) => this.setUsername(e.target.value)} pattern="[a-zA-Z0-9]{6,}" />
-                    <Form.Control.Feedback type="invalid">Please enter a valid username with at least 6 alphanumeric characters.</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                     <Form.Label className="form-label">
                       Password<span className="required">*</span>
                     </Form.Label>
                     <Form.Control type="password" placeholder="Current or New Password" onChange={(e) => this.setPassword(e.target.value)} pattern=".{6,}" required />
-                    <Form.Control.Feedback type="invalid">Please enter a valid password with at least 6 characters.</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">Please enter a valid password.</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label className="form-label">Email</Form.Label>
@@ -236,7 +234,7 @@ export class ProfileView extends React.Component {
             <Card className="update-card">
               <h1 className="profile-title">Delete Your Profile</h1>
               <Card.Body>
-                <Button className="profile-button delete-button" block onClick={(e) => this.handleDeregister(e)}>
+                <Button className="profile-button delete-button" variant='danger' block onClick={(e) => this.handleDeregister(e)}>
                   Click Here If You're Sure You Want To Delete Your Profile
 								</Button>
               </Card.Body>

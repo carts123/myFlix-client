@@ -51660,7 +51660,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       Password: null,
       Email: null,
       Birthday: null,
-      FavouriteMovies: [],
+      FavoriteMovies: [],
       validated: null
     };
     return _this;
@@ -51693,15 +51693,15 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
-          FavouriteMovies: response.data.FavouriteMovies
+          FavoriteMovies: response.data.FavoriteMovies
         });
       }).catch(function (error) {
         console.log(error);
       });
     }
   }, {
-    key: "handleRemoveFavourite",
-    value: function handleRemoveFavourite(e, movie) {
+    key: "handleRemoveFavorite",
+    value: function handleRemoveFavorite(e, movie) {
       var _this3 = this;
 
       e.preventDefault();
@@ -51715,8 +51715,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function () {
         alert('Movie removed from favourites');
 
-        _this3.componentDidMount(); // window.open('_self');
-
+        _this3.componentDidMount();
       }).catch(function (error) {
         console.log(error);
       });
@@ -51817,7 +51816,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       var _this$state = this.state,
-          FavouriteMovies = _this$state.FavouriteMovies,
+          FavoriteMovies = _this$state.FavoriteMovies,
           validated = _this$state.validated;
       var username = localStorage.getItem('user');
       var movies = this.props.movies;
@@ -51834,12 +51833,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profile-card"
       }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "profile-title"
-      }, username, "'s Favourite Movies"), FavouriteMovies.length === 0 && _react.default.createElement("div", {
+      }, username, "'s Favourite Movies"), FavoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "card-content"
-      }, "You don't have any favourite movies yet!"), _react.default.createElement("div", {
+      }, "You have no favourite movies yet!"), _react.default.createElement("div", {
         className: "favourites-container"
-      }, FavouriteMovies.length > 0 && movies.map(function (movie) {
-        if (movie._id === FavouriteMovies.find(function (favMovie) {
+      }, FavoriteMovies.length > 0 && movies.map(function (movie) {
+        if (movie._id === FavoriteMovies.find(function (favMovie) {
           return favMovie === movie._id;
         })) {
           return _react.default.createElement("div", {
@@ -51872,7 +51871,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
             className: "profile-button remove-favourite",
             variant: "danger",
             onClick: function onClick(e) {
-              return _this5.handleRemoveFavourite(e, movie._id);
+              return _this5.handleRemoveFavorite(e, movie._id);
             }
           }, "Remove"))));
         }
@@ -52063,10 +52062,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     };
     _this.onLoggedOut = _this.onLoggedOut.bind(_assertThisInitialized(_this));
     return _this;
-  } // Get all movies
-
+  }
 
   _createClass(MainView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var accessToken = localStorage.getItem('token');
+
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem('user')
+        });
+        this.getMovies(accessToken);
+      }
+    } // Get all movies
+
+  }, {
     key: "getMovies",
     value: function getMovies(token) {
       var _this2 = this;
@@ -52083,18 +52094,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
-
-      if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
-        this.getMovies(accessToken);
-      }
     }
     /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
@@ -52356,7 +52355,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54935" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60584" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

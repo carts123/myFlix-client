@@ -34,6 +34,15 @@ export class MainView extends React.Component {
     this.onLoggedOut = this.onLoggedOut.bind(this);
   }
 
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
 
   // Get all movies
   getMovies(token) {
@@ -51,15 +60,6 @@ export class MainView extends React.Component {
       });
   }
 
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
-  }
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
