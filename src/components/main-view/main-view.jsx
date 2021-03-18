@@ -134,6 +134,9 @@ export class MainView extends React.Component {
             return <ProfileView movies={movies} />;
           }}
           />
+          <Route path="/login" render={() => {
+          }}
+          />
         </div>
       </Router>
     );

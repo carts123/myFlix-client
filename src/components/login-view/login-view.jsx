@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './login-view.scss';
@@ -38,7 +39,10 @@ export function LoginView(props) {
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="dark" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Link to={'/register'}> <Button variant="dark" className="register-button" size="sm">Register</Button>
+      </Link>
     </Form>
+
   );
 }
 
