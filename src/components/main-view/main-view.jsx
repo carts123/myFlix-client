@@ -80,6 +80,7 @@ export class MainView extends React.Component {
 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    window.open('/', '_self');
     console.log('logout successful');
 
   }
@@ -134,9 +135,7 @@ export class MainView extends React.Component {
             return <ProfileView movies={movies} />;
           }}
           />
-          <Route path="/login" render={() => {
-          }}
-          />
+          <Route path="/login" render={() => <LoginView />} />
         </div>
       </Router>
     );

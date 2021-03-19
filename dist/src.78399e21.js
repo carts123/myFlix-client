@@ -51215,6 +51215,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _axios = _interopRequireDefault(require("axios"));
 
 require("./login-view.scss");
@@ -51278,10 +51280,15 @@ function LoginView(props) {
       return setPassword(e.target.value);
     }
   })), _react.default.createElement(_reactBootstrap.Button, {
-    variant: "dark",
+    variant: "primary",
     type: "submit",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Sign In"), _react.default.createElement(_reactRouterDom.Link, {
+    to: '/register'
+  }, " ", _react.default.createElement(_reactBootstrap.Button, {
+    variant: "dark",
+    className: "register-button"
+  }, "Register")));
 }
 
 LoginView.propTypes = {
@@ -51292,7 +51299,7 @@ LoginView.propTypes = {
   onLoggedIn: _propTypes.default.func.isRequired,
   onRegister: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51468,7 +51475,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RegisterView = RegisterView;
+exports.RegistrationView = RegistrationView;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -51477,6 +51484,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactBootstrap = require("react-bootstrap");
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRouterDom = require("react-router-dom");
 
 require("./registration-view.scss");
 
@@ -51498,7 +51507,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function RegisterView(props) {
+function RegistrationView(props) {
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -51516,13 +51525,8 @@ function RegisterView(props) {
 
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      confirmPassword = _useState8[0],
-      setConfirmPassword = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      birthday = _useState10[0],
-      setBirthday = _useState10[1];
+      birthday = _useState8[0],
+      setBirthday = _useState8[1];
 
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
@@ -51549,52 +51553,60 @@ function RegisterView(props) {
     type: "text",
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    },
+    placeholder: "Enter Username"
+  }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+    type: "invalid"
+  }, "Please enter a valid username with at least 5 alphanumeric characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "email",
     onChange: function onChange(e) {
       return setEmail(e.target.value);
-    }
+    },
+    placeholder: "Enter Email Address"
   }))), _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formPassword"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formConfirmPassword"
-  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Confirm Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
-    type: "password",
-    onChange: function onChange(e) {
-      return setConfirmPassword(e.target.value);
-    }
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    },
+    placeholder: "Enter Password"
+  }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+    type: "invalid"
+  }, "Username contains non alphanumeric characters - not allowed.")), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBirthday"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
-    }
-  }))), _react.default.createElement(_reactBootstrap.Button, {
-    variant: "dark",
+    },
+    placeholder: "Enter Birthday"
+  }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+    type: "invalid"
+  }, "Please enter a valid birthday."))), _react.default.createElement(_reactBootstrap.Button, {
+    block: true,
+    variant: "primary",
     type: "submit",
-    onClick: handleSubmit
-  }, "Register"));
+    onClick: handleRegister
+  }, "Register"), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/login"
+  }, _react.default.createElement(_reactBootstrap.Button, {
+    className: "registration-button",
+    variant: "dark"
+  }, "Back to Login")));
 }
 
-RegisterView.propTypes = {
-  register: _propTypes.default.shape({
+RegistrationView.propTypes = {
+  user: _propTypes.default.shape({
     username: _propTypes.default.string.isRequired,
     password: _propTypes.default.string.isRequired,
-    confirmPassword: _propTypes.default.string.isRequired,
-    birthday: _propTypes.default.string.isRequired
-  }),
-  onRegister: _propTypes.default.func.isRequired
+    email: _propTypes.default.string.isRequired,
+    birthday: _propTypes.default.string
+  })
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52116,6 +52128,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      window.open('/', '_self');
       console.log('logout successful');
     }
   }, {
@@ -52231,6 +52244,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           return _react.default.createElement(_profileView.ProfileView, {
             movies: movies
           });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/login",
+        render: function render() {
+          return _react.default.createElement(_loginView.LoginView, null);
         }
       })));
     }
@@ -52355,7 +52373,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63744" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62371" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
