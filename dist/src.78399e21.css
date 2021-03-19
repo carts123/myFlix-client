@@ -1,3 +1,6 @@
+.movie-card {
+  margin: 10px 0px;
+}
 .login-form {
   margin: 20px;
   padding: 30px;
@@ -5,17 +8,6 @@
 
 .login-header {
   text-align: center;
-}
-.register-form {
-  margin: 20px;
-  padding: 30px;
-}
-
-.register-header {
-  text-align: center;
-}
-.movie-card {
-  margin: 10px 0px;
 }
 .movie-view {
   margin: 0px 50px;
@@ -37,6 +29,14 @@
 .return-button {
   margin: auto;
   margin-bottom: 20px;
+}
+.register-form {
+  margin: 20px;
+  padding: 30px;
+}
+
+.register-header {
+  text-align: center;
 }
 .main-body {
   padding: 20px;

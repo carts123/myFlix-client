@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 import './movie-view.scss';
 
@@ -10,6 +12,23 @@ export class MovieView extends React.Component {
     super();
 
     this.state = {};
+  }
+
+  handleAddFavourite(e, movie) {
+    e.preventDefault();
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios({
+      method: 'post',
+      url: `https://mycfdb.herokuapp.com/users/${username}/Movies/${movie._id}`,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(() => {
+        alert(`${movie.Title} was succesfully added to your Favourites`);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 
   render() {
@@ -37,7 +56,19 @@ export class MovieView extends React.Component {
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
         </div>
-        <button onClick={this.props.onBackClick}>Go Back</button>
+        <div>
+          <Button className="movie-view-button favourites-button" variant="dark" size="sm" value={movie._id} onClick={(e) => this.handleAddFavourite(e, movie)}>
+            Add to Favourites
+								</Button>
+        </div>
+        <Link to={'/'}> <Button variant="dark" className="mt-3" size="sm">Back</Button>
+        </Link>
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button variant="light">Director</Button>
+        </Link>
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button variant="light">Genre</Button>
+        </Link>
       </div>
 
 
@@ -46,10 +77,11 @@ export class MovieView extends React.Component {
 }
 
 MovieView.propTypes = {
-  movie: PropTypes.shape({
+  Movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
+
     Genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
       Description: PropTypes.string.isRequired,
@@ -60,6 +92,5 @@ MovieView.propTypes = {
       Birth: PropTypes.string.isRequired,
       Death: PropTypes.string,
     }),
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  })
 };

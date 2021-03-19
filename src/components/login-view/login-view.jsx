@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import './login-view.scss';
 
@@ -9,13 +10,21 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
-    props.onLoggedIn(password);
+    axios.post('https://mycfdb.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
   };
 
   return (
@@ -29,8 +38,11 @@ export function LoginView(props) {
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button variant="primary" type="submit" onClick={handleSubmit}>Sign In</Button>
+      <Link to={'/register'}> <Button variant="dark" className="register-button">Register</Button>
+      </Link>
     </Form>
+
   );
 }
 
