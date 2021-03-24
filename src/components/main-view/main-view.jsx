@@ -1,37 +1,38 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
 
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
+//import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { ProfileView } from '../profile-view/profile-view';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 import './main-view.scss';
 
 import {
   Navbar,
   Nav,
-  CardDeck,
+  Form,
 } from 'react-bootstrap';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
   constructor() {
     super();
 
     this.state = {
-      movies: [],
-      selectedMovie: null,
-      user: null,
-      register: null
+      user: null
     };
-    this.onLoggedOut = this.onLoggedOut.bind(this);
   }
 
   componentDidMount() {
@@ -50,10 +51,7 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -74,10 +72,6 @@ export class MainView extends React.Component {
   }
 
   onLoggedOut() {
-    this.setState({
-      user: null,
-    });
-
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     window.open('/', '_self');
@@ -86,12 +80,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    let { movies, user } = this.state;
-
-
-    //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-    if (!movies) return <div className='main-view' />;
-
+    let { movies, visibilityFilter } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
@@ -108,13 +98,16 @@ export class MainView extends React.Component {
                   <Nav.Link className='navLink' as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
                   <Nav.Link className='navLink' as={Link} to={`/login`} target='_self' onClick={this.onLoggedOut}>Log Out</Nav.Link>
                 </Nav>
+                <Form inline>
+                  <VisibilityFilterInput variant='outline-light' visibilityFilter={visibilityFilter} />
+                </Form>
               </Navbar.Collapse>
             </Navbar>
           </header>
 
           <Route exact path="/" render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return <CardDeck> {movies.map(m => <MovieCard key={m._id} movie={m} />)} </CardDeck>
+            return <MoviesList movie={movies} />;
           }
           } />
           <Route path="/register" render={() => <RegistrationView />} />
@@ -142,22 +135,28 @@ export class MainView extends React.Component {
   }
 }
 
-MainView.propTypes = {
-  movie: PropTypes.arrayOf({
-    _id: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-    }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-    }),
-    ImagePath: PropTypes.string.isRequired,
-    Featured: PropTypes.bool,
-  }),
-  user: PropTypes.string,
+let mapStateToProps = state => {
+  return { movies: state.movies }
 };
+
+export default connect(mapStateToProps, { setMovies })(MainView);
+
+//MainView.propTypes = {
+  //movie: PropTypes.arrayOf({
+    //_id: PropTypes.string.isRequired,
+    //Title: PropTypes.string.isRequired,
+    //Description: PropTypes.string.isRequired,
+    //Genre: PropTypes.shape({
+      //Name: PropTypes.string.isRequired,
+      //Description: PropTypes.string.isRequired,
+    //}),
+    //Director: PropTypes.shape({
+      //Name: PropTypes.string.isRequired,
+      //Bio: PropTypes.string.isRequired,
+      //Birth: PropTypes.string.isRequired,
+    //}),
+    //ImagePath: PropTypes.string.isRequired,
+    //Featured: PropTypes.bool,
+  //}),
+  //user: PropTypes.string,
+//};
