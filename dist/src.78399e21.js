@@ -53778,7 +53778,8 @@ function LoginView(props) {
       var data = response.data;
       props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log('no such user');
+      alert('User does not exist');
+      console.log('user does not exist');
     });
   };
 
@@ -53811,15 +53812,6 @@ function LoginView(props) {
     className: "register-button"
   }, "Register")));
 }
-
-LoginView.propTypes = {
-  user: _propTypes.default.shape({
-    username: _propTypes.default.string.isRequired,
-    password: _propTypes.default.string.isRequired
-  }),
-  onLoggedIn: _propTypes.default.func.isRequired,
-  onRegister: _propTypes.default.func
-};
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -54957,7 +54949,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58149" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59040" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

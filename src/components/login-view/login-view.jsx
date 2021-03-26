@@ -23,7 +23,8 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-        console.log('no such user')
+        alert('User does not exist')
+        console.log('user does not exist')
       });
   };
 
@@ -45,12 +46,3 @@ export function LoginView(props) {
 
   );
 }
-
-LoginView.propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  }),
-  onLoggedIn: PropTypes.func.isRequired,
-  onRegister: PropTypes.func,
-};
